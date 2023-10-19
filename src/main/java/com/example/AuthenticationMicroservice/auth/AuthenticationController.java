@@ -1,5 +1,6 @@
 package com.example.AuthenticationMicroservice.auth;
 
+import com.example.AuthenticationMicroservice.user.UserEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/auth")
+@CrossOrigin("http://localhost:4200/")
 public class AuthenticationController {
     private final AuthenticationService service;
 
@@ -21,6 +23,13 @@ public class AuthenticationController {
             @RequestBody AuthenticationRequest request
     ) {
         return ResponseEntity.ok(service.authenticate(request));
+    }
+
+    @GetMapping("/user/{email}")
+    public UserEntity getUser(
+            @PathVariable String email
+    ) {
+        return service.getUser(email);
     }
 
 

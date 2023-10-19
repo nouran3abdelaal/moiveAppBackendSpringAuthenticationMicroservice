@@ -29,6 +29,7 @@ public class AuthenticationService {
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
                 .token(jwtToken)
+                .name(request.getName())
                 .build();
     }
 
@@ -44,7 +45,11 @@ public class AuthenticationService {
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
                 .token(jwtToken)
+                .name(user.getName())
                 .build();
     }
 
+    public UserEntity getUser(String email) {
+       return repository.findByEmail(email).orElse(new UserEntity());
+    }
 }

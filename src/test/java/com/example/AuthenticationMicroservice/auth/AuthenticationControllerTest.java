@@ -28,7 +28,7 @@ class AuthenticationControllerTest {
         @DisplayName("testRegister with empty request")
         public void testRegister() {
             RegisterRequest request = new RegisterRequest();
-            AuthenticationResponse response = new AuthenticationResponse("token");
+            AuthenticationResponse response = new AuthenticationResponse("token","name");
             Mockito.when(service.register(request)).thenReturn(response);
 
             ResponseEntity<AuthenticationResponse> result = authenticationController.register(request);
@@ -44,7 +44,7 @@ class AuthenticationControllerTest {
     @DisplayName("testRegister with none empty request")
     public void testRegisterWithBody() {
         RegisterRequest request = new RegisterRequest("nouran","nona@gmail.com","pass", Role.USER);
-        AuthenticationResponse response = new AuthenticationResponse("token");
+        AuthenticationResponse response = new AuthenticationResponse("token","name");
         Mockito.when(service.register(request)).thenReturn(response);
 
         ResponseEntity<AuthenticationResponse> result = authenticationController.register(request);
@@ -62,7 +62,7 @@ class AuthenticationControllerTest {
 
         AuthenticationRequest request = new AuthenticationRequest();
 
-        AuthenticationResponse response = new AuthenticationResponse("token");
+        AuthenticationResponse response = new AuthenticationResponse("token","name");
         Mockito.when(service.authenticate(request)).thenReturn(response);
 
         ResponseEntity<AuthenticationResponse> result = authenticationController.authenticate(request);
@@ -75,7 +75,7 @@ class AuthenticationControllerTest {
     public void testAuthenticateWithBody() {
         AuthenticationRequest request = new AuthenticationRequest("username", "password");
 
-        AuthenticationResponse response = new AuthenticationResponse("token");
+        AuthenticationResponse response = new AuthenticationResponse("token","name");
         Mockito.when(service.authenticate(request)).thenReturn(response);
 
         ResponseEntity<AuthenticationResponse> result = authenticationController.authenticate(request);
