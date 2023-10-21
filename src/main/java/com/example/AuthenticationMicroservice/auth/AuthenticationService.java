@@ -49,7 +49,7 @@ public class AuthenticationService {
                 .build();
     }
 
-    public UserEntity getUser(String email) {
-       return repository.findByEmail(email).orElse(new UserEntity());
+    public boolean checkIfEmailExits(String email) {
+       return repository.findByEmail(email).isPresent();
     }
 }

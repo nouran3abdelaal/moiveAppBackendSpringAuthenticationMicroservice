@@ -26,10 +26,10 @@ public class AuthenticationController {
     }
 
     @GetMapping("/user/{email}")
-    public UserEntity getUser(
+    public boolean checkIfEmailExits(
             @PathVariable String email
     ) {
-        return service.getUser(email);
+        return service.checkIfEmailExits(email);
     }
 
 
